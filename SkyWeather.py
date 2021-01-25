@@ -79,6 +79,8 @@ import SDL_Pi_HDC1000
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
+from apscheduler.triggers.cron import CronTrigger
+
 import apscheduler.events
 
 if (config.enable_MySQL_Logging == True):
