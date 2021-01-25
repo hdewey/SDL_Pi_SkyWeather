@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+import subprocess
+
 #
 # SkyWeather Solar Powered Weather Station
 # February 2019
@@ -40,6 +43,9 @@ import updateBlynk
 
 import state
 
+
+def createTimelapse():
+	subprocess.call('sudo node timelapse.js')
 
 sys.path.append('./TSL2591')
 sys.path.append('./SDL_Pi_SI1145')
@@ -1829,6 +1835,9 @@ scheduler.add_job(rebootPi, 'cron', day='5-30/5', hour=0, minute=4, args=["5 day
 	
 #check for Barometric Trend (every 15 minutes)
 scheduler.add_job(barometricTrend, 'interval', seconds=15*60)
+
+# add job for timelapse creation at 5am 
+scheduler.add_job(createTimelapse, 'cron', hour=5, minute=0, args=["Daily timelapse generation"])
 
 if (config.DustSensor_Present):
     scheduler.add_job(DustSensor.read_AQI, 'interval', seconds=60*15)
