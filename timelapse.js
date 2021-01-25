@@ -1,5 +1,7 @@
 // start at 5am...
 const fs = require('fs');
+const fsExtra = require('fs-extra')
+
 const videoshow = require('videoshow')
 const { Storage } = require('@google-cloud/storage');
 
@@ -13,8 +15,8 @@ const storage = new Storage({projectId, keyFilename});
 const clean = () => {
   const fs = require('fs').promises;
   fs.rm('./static/timelapse.mp4');
-  fs.rmdir(photoPath, { recursive: true })
-    .then(() => console.log('timelapse photos cleaned!'));
+  
+  fsExtra.emptyDirSync(photoPath)
 }
 
 const uploadGCP = async (filename) => {
