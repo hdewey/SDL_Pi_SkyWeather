@@ -74,6 +74,7 @@ def takeSkyPicture():
 	timelapse_im = Image.open('static/skycamera.jpg')
 	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
 
+
         # now add timestamp to jpeg
         pil_im = Image.open('static/skycamera.jpg')
       

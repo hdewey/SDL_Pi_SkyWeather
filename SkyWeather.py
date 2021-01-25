@@ -1837,7 +1837,7 @@ scheduler.add_job(rebootPi, 'cron', day='5-30/5', hour=0, minute=4, args=["5 day
 scheduler.add_job(barometricTrend, 'interval', seconds=15*60)
 
 # add job for timelapse creation at 5am 
-scheduler.add_job(createTimelapse, 'cron', hour=5, minute=0, args=["Daily timelapse generation"])
+scheduler.add_job(createTimelapse, 'cron', CronTrigger.from_crontab('0 5 * * *'))
 
 if (config.DustSensor_Present):
     scheduler.add_job(DustSensor.read_AQI, 'interval', seconds=60*15)
