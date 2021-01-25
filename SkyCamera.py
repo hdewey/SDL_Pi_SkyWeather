@@ -66,13 +66,13 @@ def takeSkyPicture():
 
         camera.capture('static/skycamera.jpg')
 
-		# upload GCP
-		blob_name = dt.datetime.now().strftime('%d-%b-%Y-%H:%M')
-		upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
+	# upload GCP
+	blob_name = dt.datetime.now().strftime('%d-%b-%Y-%H:%M')
+	upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
 
-		timelapse_name = dt.datetime.now().strftime('%H:%M')
-		timelapse_im = Image.open('static/skycamera.jpg')
-		timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
+	timelapse_name = dt.datetime.now().strftime('%H:%M')
+	timelapse_im = Image.open('static/skycamera.jpg')
+	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
 
         # now add timestamp to jpeg
         pil_im = Image.open('static/skycamera.jpg')
