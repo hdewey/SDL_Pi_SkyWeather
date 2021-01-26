@@ -1,6 +1,6 @@
 // start at 5am...
-const fs = require('fs');
 const fsExtra = require('fs-extra')
+const rm = require('rm');
 
 const videoshow = require('videoshow')
 const { Storage } = require('@google-cloud/storage');
@@ -13,8 +13,7 @@ const keyFilename = 'service-key.json'
 const storage = new Storage({projectId, keyFilename});
 
 const clean = () => {
-  const fs = require('fs').promises;
-  fs.rm('./static/timelapse.mp4');
+  rm('./static/timelapse.mp4');
   
   fsExtra.emptyDirSync(photoPath)
 }
