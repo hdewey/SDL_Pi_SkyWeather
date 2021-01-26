@@ -13,12 +13,16 @@ const keyFilename = 'service-key.json'
 const storage = new Storage({projectId, keyFilename});
 
 const clean = () => {
-  const fs = require('fs').promises;
-  fs.rm('./static/timelapse.mp4');
+
+  try {
+    fs.unlinkSync('./static/timelapse.mp4')
+    //file removed
+  } catch(err) {
+    console.error(err)
+  }
   
   fsExtra.emptyDirSync(photoPath)
 }
-
 const uploadGCP = async (filename) => {
 
   let time = new Date();

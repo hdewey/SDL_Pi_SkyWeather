@@ -1,6 +1,6 @@
 // start at 5am...
-const fsExtra = require('fs-extra')
 const fs = require('fs')
+const fsExtra = require('fs-extra')
 
 const videoshow = require('videoshow')
 const { Storage } = require('@google-cloud/storage');

@@ -1,6 +1,3 @@
-#! /usr/bin/env python
-import subprocess
-
 #
 # SkyWeather Solar Powered Weather Station
 # February 2019
@@ -43,9 +40,11 @@ import updateBlynk
 
 import state
 
+from Naked.toolshed.shell import execute_js
 
 def createTimelapse():
-	subprocess.call('sudo node timelapse.js')
+	success = execute_js('timelapse.js')
+    print(success)
 
 sys.path.append('./TSL2591')
 sys.path.append('./SDL_Pi_SI1145')
