@@ -1,4 +1,4 @@
-import subprocess
+from Naked.toolshed.shell import execute_js
 
 def createTimelapse():
-	subprocess.call('sudo node timelapse-test.js')
+	success = execute_js('timelapse-test.js')
