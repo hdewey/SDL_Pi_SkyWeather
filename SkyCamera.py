@@ -28,7 +28,7 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
     # source_file_name = "local/path/to/file"
     # destination_blob_name = "storage-object-name"
 
-    storage_client = storage.Client.from_service_account_json('servicekey.json')
+    storage_client = storage.Client.from_service_account_json('service-key.json')
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(destination_blob_name)
 
@@ -39,6 +39,16 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
             source_file_name, destination_blob_name
         )
     )
+
+def runUpload() {
+	# upload GCP
+	blob_name = 'recent'
+	upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
+
+	timelapse_name = dt.datetime.now().strftime('%H:%M')
+	timelapse_im = Image.open('static/skycamera.jpg')
+	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
+}
 
 def SkyWeatherKeyGeneration(userKey):
 
@@ -65,15 +75,6 @@ def takeSkyPicture():
         time.sleep(2)
 
         camera.capture('static/skycamera.jpg')
-
-	# upload GCP
-	blob_name = 'recent'
-	upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
-
-	timelapse_name = dt.datetime.now().strftime('%H:%M')
-	timelapse_im = Image.open('static/skycamera.jpg')
-	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
-
 
         # now add timestamp to jpeg
         pil_im = Image.open('static/skycamera.jpg')
@@ -127,10 +128,14 @@ def takeSkyPicture():
         pil_im.paste(SWLimg, (bg_w-size, bg_h-size))
 
         # Save the image
-        pil_im.save('static/skycamera.jpg', format= 'JPEG')
+        #pil_im.save('static/skycamera.jpg', format= 'JPEG')
         pil_im.save('static/skycameraprocessed.jpg', format= 'JPEG')
-
-        time.sleep(2)
+        
+		time.sleep(2)
+		
+		runUpload()
+        
+		time.sleep(2)
 
     except:
             if (config.SWDEBUG):

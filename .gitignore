@@ -11,3 +11,5 @@ conflocal.py
 state/EnglishMetric.txt
 static/SkyCamera.py
 static/*.jpg
+.vscode
+servicekey.json
