@@ -67,7 +67,7 @@ def takeSkyPicture():
         camera.capture('static/skycamera.jpg')
 
 	# upload GCP
-	blob_name = dt.datetime.now().strftime('%d-%b-%Y-%H:%M')
+	blob_name = 'recent'
 	upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
 
 	timelapse_name = dt.datetime.now().strftime('%H:%M')
