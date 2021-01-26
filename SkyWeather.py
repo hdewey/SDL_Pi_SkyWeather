@@ -43,7 +43,7 @@ import state
 from Naked.toolshed.shell import execute_js
 
 def createTimelapse():
-	success = execute_js('timelapse.js')
+    success = execute_js('timelapse.js')
     print(success)
 
 sys.path.append('./TSL2591')
