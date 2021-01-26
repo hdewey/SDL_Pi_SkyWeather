@@ -40,7 +40,7 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
         )
     )
 
-def runUpload() {
+def runUpload():
 	# upload GCP
 	blob_name = 'recent'
 	upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
@@ -48,7 +48,6 @@ def runUpload() {
 	timelapse_name = dt.datetime.now().strftime('%H:%M')
 	timelapse_im = Image.open('static/skycamera.jpg')
 	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
-}
 
 def SkyWeatherKeyGeneration(userKey):
 
