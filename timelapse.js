@@ -26,7 +26,7 @@ const clean = () => {
 const uploadGCP = async (filename) => {
 
   let time = new Date();
-  let d = time.getDay();
+  let d = time.getDate();
   let m = time.getMonth();
   let y = time.getFullYear();
 
@@ -38,7 +38,7 @@ const uploadGCP = async (filename) => {
     },
   });
 
-  console.log(`${filename} uploaded to ${bucketName}.`);
+  console.log(`${filename} uploaded to ${bucketName} as ${m}-${d}-${y}.mp4`);
 
   clean();
 

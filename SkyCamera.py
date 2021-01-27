@@ -41,13 +41,9 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
     )
 
 def runUpload():
-	# upload GCP
-	blob_name = 'recent'
-	upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
-
-	timelapse_name = dt.datetime.now().strftime('%H:%M')
-	timelapse_im = Image.open('static/skycamera.jpg')
-	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
+    # upload GCP
+    blob_name = 'recent'
+    upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
 
 def SkyWeatherKeyGeneration(userKey):
 
@@ -74,6 +70,10 @@ def takeSkyPicture():
         time.sleep(2)
 
         camera.capture('static/skycamera.jpg')
+
+        timelapse_name = dt.datetime.now().strftime('%H:%M')
+	timelapse_im = Image.open('static/skycamera.jpg')
+	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
 
         # now add timestamp to jpeg
         pil_im = Image.open('static/skycamera.jpg')
@@ -129,8 +129,6 @@ def takeSkyPicture():
         # Save the image
         #pil_im.save('static/skycamera.jpg', format= 'JPEG')
         pil_im.save('static/skycameraprocessed.jpg', format= 'JPEG')
-
-	time.sleep(2)
 
 	runUpload()
 
