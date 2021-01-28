@@ -61,7 +61,7 @@ def takeSkyPicture():
         print ("--------------------")
     camera = picamera.PiCamera()
 
-	saveData()
+    saveData()
 
     camera.exposure_mode = "auto"
     try:
@@ -74,8 +74,8 @@ def takeSkyPicture():
         camera.capture('static/skycamera.jpg')
 
         timelapse_name = dt.datetime.now().strftime('%H:%M')
-		timelapse_im = Image.open('static/skycamera.jpg')
-		timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
+	timelapse_im = Image.open('static/skycamera.jpg')
+	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
 
         # now add timestamp to jpeg
         pil_im = Image.open('static/skycamera.jpg')
@@ -132,9 +132,8 @@ def takeSkyPicture():
         #pil_im.save('static/skycamera.jpg', format= 'JPEG')
         pil_im.save('static/skycameraprocessed.jpg', format= 'JPEG')
 
-		runUpload()
-
-		time.sleep(2)
+	runUpload()
+	time.sleep(2)
 
     except:
             if (config.SWDEBUG):
@@ -171,7 +170,6 @@ def saveData():
                 "key":  config.STATIONKEY,
                 "MAC":config.STATIONMAC,
 	},
-	"utc":currentTime,
 	"sensors":[
 
 
@@ -255,13 +253,6 @@ def saveData():
 			"name":"SeaLevelPressure",
 			"value": state.currentSeaLevel,
                         "units" : "hPa"
-		},
-		{
-			"name":"BarometricTrend",
-			"value": bptrendvalue,
-                        "units" : ""
-
-
 		},
 		{
 			"name":"OutdoorAirQuality",
@@ -395,20 +386,13 @@ def saveData():
 
 		}
 		
-	],
-	"cameras":[
-		{
-			"name":"Sky Camera",
-                        "image": encoded_string
-		}
-		
 	]
     }
 
 	with open('static/recent.txt', 'w') as outfile:
-    	json.dump(data, outfile)
+	    	json.dump(data, outfile)
 
-		upload_blob('raw_weather_photos', 'static/recent.txt', 'data.txt')
+	upload_blob('raw_weather_photos', 'static/recent.txt', 'data.txt')
 
 
 def sendSkyWeather():
