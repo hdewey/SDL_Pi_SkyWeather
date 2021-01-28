@@ -73,6 +73,8 @@ const run = (images) => {
 
 const start = async () => {
 
+  console.log('starting timelapse generation')
+
   fs.readdir(photoPath, (err, files) => {
     let arr = [];
 
@@ -81,6 +83,8 @@ const start = async () => {
     })
 
     const final = arr;
+
+	console.log(final.length)
 
     run(final);
 
