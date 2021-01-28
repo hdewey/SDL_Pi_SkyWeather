@@ -1837,15 +1837,15 @@ scheduler.add_job(rebootPi, 'cron', day='5-30/5', hour=0, minute=4, args=["5 day
 #check for Barometric Trend (every 15 minutes)
 scheduler.add_job(barometricTrend, 'interval', seconds=15*60)
 
-# add job for timelapse creation at 5am 
-scheduler.add_job(createTimelapse, 'cron', hour=10, minute=1)
-
 if (config.DustSensor_Present):
     scheduler.add_job(DustSensor.read_AQI, 'interval', seconds=60*15)
     
 # sky camera
 if (config.Camera_Present):
     scheduler.add_job(SkyCamera.takeSkyPicture, 'interval', seconds=config.INTERVAL_CAM_PICS__SECONDS) 
+
+# add job for timelapse creation at 5am 
+scheduler.add_job(createTimelapse, 'cron', hour=5, minute=0)
 
 
 # start scheduler

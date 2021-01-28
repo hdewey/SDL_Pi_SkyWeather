@@ -12,6 +12,8 @@ const projectId = 'skyweatherv3'
 const keyFilename = 'service-key.json'
 const storage = new Storage({projectId, keyFilename});
 
+const moment = require('moment')
+
 const clean = () => {
 
   try {
@@ -25,20 +27,17 @@ const clean = () => {
 }
 const uploadGCP = async (filename) => {
 
-  let time = new Date();
-  let d = time.getDate();
-  let m = time.getMonth();
-  let y = time.getFullYear();
+  const yesterday = moment().format('M-D-YYYY')
 
   await storage.bucket(bucketName).upload(filename, {
     gzip: true,
-    destination: `${m}-${d}-${y}.mp4`,
+    destination: `${yesterday}.mp4`,
     metadata: {
       cacheControl: 'public, max-age=31536000',
     },
   });
 
-  console.log(`${filename} uploaded to ${bucketName} as ${m}-${d}-${y}.mp4`);
+  console.log(`${filename} uploaded to ${bucketName} as ${yesterday}.mp4`);
 
   clean();
 
@@ -67,7 +66,7 @@ const run = (images) => {
     })
     .on('end', function (output) {
       console.error('Video created in:', output)
-      uploadGCP(output);
+      uploadGCP('static/timelapse.mp4');
     })
 }
 
@@ -83,8 +82,6 @@ const start = async () => {
     })
 
     const final = arr;
-
-	console.log(final.length)
 
     run(final);
 
