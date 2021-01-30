@@ -42,7 +42,7 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 
 def runUpload():
     # upload GCP
-    blob_name = 'recent'
+    blob_name = 'recent.jpg'
     upload_blob('raw_weather_photos', 'static/skycamera.jpg', blob_name)
 
 def SkyWeatherKeyGeneration(userKey):
