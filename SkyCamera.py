@@ -74,8 +74,8 @@ def takeSkyPicture():
         camera.capture('static/skycamera.jpg')
 
         timelapse_name = dt.datetime.now().strftime('%H:%M')
-	timelapse_im = Image.open('static/skycamera.jpg')
-	timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
+        timelapse_im = Image.open('static/skycamera.jpg')
+        timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
 
         # now add timestamp to jpeg
         pil_im = Image.open('static/skycamera.jpg')
@@ -162,14 +162,6 @@ import json
 
 def saveData():
 	data = {
-                "SkyWeatherVersion": config.SWVERSION,
-                "SkyWeatherHardware": config.STATIONHARDWARE,
-                "api_key": state.WeatherSTEMHash,
-
-	"device":{
-                "key":  config.STATIONKEY,
-                "MAC":config.STATIONMAC,
-	},
 	"sensors":[
 
 
@@ -276,123 +268,14 @@ def saveData():
                         "units" : ""
 
 		}
-                ],
-	"solarpower":[
-		{
-			"name":"BatteryVoltage",
-			"value": state.batteryVoltage,
-                        "units" : "V"
-
-
-		},
-		{
-			"name":"BatteryCurrent",
-			"value": state.batteryCurrent,
-                        "units" : "ma"
-		},
-		{ 
-                        "name":"SolarVoltage", 
-                        "value": state.solarVoltage,
-                        "units" : "V"
-                },
-		{
-			"name":"SolarCurrent",
-			"value": state.solarCurrent,
-                        "units" : "ma"
-
-		}, 
-                {
-			"name":"LoadVoltage",
-			"value": state.loadVoltage,
-                        "units" : "V"
-		},
-		{
-			"name":"LoadCurrent",
-			"value": state.loadCurrent,
-                        "units" : "ma"
-		},
-		{
-			"name":"BatteryPower",
-			"value": state.batteryPower,
-                        "units" : "W"
-		},
-		{
-			"name":"SolarPower",
-			"value": state.solarPower,
-                        "units" : "W"
-		},
-		{
-			"name":"LoadPower",
-			"value": state.loadPower,
-                        "units" : "W"
-		},
-		{
-			"name":"BatteryCharge",
-			"value": state.batteryCharge,
-                        "units" : "%"
-
-		},
-		{
-			"name":"WXBatteryVoltage",
-			"value": state.WXbatteryVoltage,
-                        "units" : "V"
-
-		},
-		{
-			"name":"WXBatteryCurrent",
-			"value": state.WXbatteryCurrent,
-                        "units" : "ma"
-		},
-		{
-			"name":"WXSolarVoltage",
-			"value": state.WXsolarVoltage,
-                        "units" : "V"
-		},
-		{
-			"name":"WXSolarCurrent",
-			"value": state.WXsolarCurrent,
-                        "units" : "ma"
-		},
-		{
-			"name":"WXLoadVoltage",
-			"value": state.WXloadVoltage,
-                        "units" : "V"
-		},
-		{
-			"name":"WXLoadCurrent",
-			"value": state.WXloadCurrent,
-                        "units" : "ma"
-		},
-		{
-			"name":"WXBatteryPOWER",
-			"value": state.WXbatteryPower,
-                        "units" : "W"
-		},
-		{
-			"name":"WXSolarPower",
-			"value": state.WXsolarPower,
-                        "units" : "W"
-		},
-		{
-			"name":"WXLoadPower",
-			"value": state.WXloadPower,
-                        "units" : "W"
-		},
-		{
-			"name":"WXBatteryCharge",
-			"value": state.WXbatteryCharge,
-                        "units" : "%"
-
-
-		}
-		
-	]
+		],
+	
     }
 
 	with open('static/recent.txt', 'w') as outfile:
-	    	json.dump(data, outfile)
+	    json.dump(data, outfile)
 
-	upload_blob('raw_weather_photos', 'static/recent.txt', 'data.txt')
+	upload_blob('raw_weather_photos', 'static/recent.txt', 'recentData.json')
 
 
 def sendSkyWeather():
