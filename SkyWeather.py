@@ -42,6 +42,7 @@ import state
 
 from Naked.toolshed.shell import execute_js
 import threading
+import subprocess
 
 def runJS():
 	
@@ -49,9 +50,7 @@ def runJS():
     print(success)
 
 def createTimelapse(): 
-    t = threading.Thread(target=runJS, name='Creating Timelapse')
-    t.daemon = True
-    t.start() 
+	print subprocess.check_output("sudo node timelapse.js", shell=True)
 
 sys.path.append('./TSL2591')
 sys.path.append('./SDL_Pi_SI1145')
@@ -73,7 +72,6 @@ sys.path.append('./BME680')
 
 sys.path.append('./SDL_Pi_GrovePowerDrive')
 
-import subprocess
 import RPi.GPIO as GPIO
 import doAllGraphs
 import smbus
@@ -1852,7 +1850,7 @@ if (config.Camera_Present):
     scheduler.add_job(SkyCamera.takeSkyPicture, 'interval', seconds=config.INTERVAL_CAM_PICS__SECONDS) 
 
 # add job for timelapse creation at 5am 
-scheduler.add_job(createTimelapse, 'cron', hour=14, minute=5)
+scheduler.add_job(createTimelapse, 'cron', hour=14, minute=16)
 
 
 # start scheduler
