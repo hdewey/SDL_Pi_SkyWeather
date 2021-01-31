@@ -71,6 +71,8 @@ const run = () => {
   //     uploadGCP('static/timelapse.mp4');
   //   })
 
+  console.log('ffmpeg starting...')
+
   const ls = exec('ffmpeg -framerate 20 -pattern_type glob -i "static/timelapse/*.jpg" -s:v 1920x1080 -c:v libx264 -crf 17 -pix_fmt yuv420p static/timelapse.mp4', function (error, stdout, stderr) {
     if (error) {
       console.log(error.stack);
