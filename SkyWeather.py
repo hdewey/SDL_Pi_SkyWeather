@@ -50,6 +50,7 @@ def runJS():
     print(success)
 
 def createTimelapse(): 
+	print('starting timelapse')
 	print subprocess.check_output("sudo node timelapse.js", shell=True)
 
 sys.path.append('./TSL2591')
@@ -1850,7 +1851,7 @@ if (config.Camera_Present):
     scheduler.add_job(SkyCamera.takeSkyPicture, 'interval', seconds=config.INTERVAL_CAM_PICS__SECONDS) 
 
 # add job for timelapse creation at 5am 
-scheduler.add_job(createTimelapse, 'cron', hour=14, minute=16)
+scheduler.add_job(createTimelapse, 'cron', hour=5, minute=0)
 
 
 # start scheduler
