@@ -41,10 +41,17 @@ import updateBlynk
 import state
 
 from Naked.toolshed.shell import execute_js
+import threading
 
-def createTimelapse():
+def runJS():
+	
     success = execute_js('timelapse.js')
     print(success)
+
+def createTimelapse(): 
+    t = threading.Thread(target=runJS, name='Creating Timelapse')
+    t.daemon = True
+    t.start() 
 
 sys.path.append('./TSL2591')
 sys.path.append('./SDL_Pi_SI1145')
@@ -1845,7 +1852,7 @@ if (config.Camera_Present):
     scheduler.add_job(SkyCamera.takeSkyPicture, 'interval', seconds=config.INTERVAL_CAM_PICS__SECONDS) 
 
 # add job for timelapse creation at 5am 
-scheduler.add_job(createTimelapse, 'cron', hour=13, minute=56)
+scheduler.add_job(createTimelapse, 'cron', hour=14, minute=5)
 
 
 # start scheduler
