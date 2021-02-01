@@ -73,7 +73,7 @@ def takeSkyPicture():
 
         camera.capture('static/skycamera.jpg')
 
-        timelapse_name = dt.datetime.now().strftime('%H:%M')
+        timelapse_name = dt.datetime.now().strftime('%H:%M.jpg')
         timelapse_im = Image.open('static/skycamera.jpg')
         timelapse_im.save('static/timelapse/' + timelapse_name, format= 'JPEG' )
 
