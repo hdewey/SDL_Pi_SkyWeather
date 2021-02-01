@@ -1851,7 +1851,7 @@ if (config.Camera_Present):
     scheduler.add_job(SkyCamera.takeSkyPicture, 'interval', seconds=config.INTERVAL_CAM_PICS__SECONDS) 
 
 # add job for timelapse creation at 5am 
-scheduler.add_job(createTimelapse, 'cron', hour=16, minute=46)
+scheduler.add_job(createTimelapse, 'cron', hour=5, minute=0)
 
 
 # start scheduler
